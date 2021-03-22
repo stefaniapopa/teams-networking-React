@@ -19,20 +19,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.warn('mount');
-    setTimeout(() => {
-      console.warn('loaded');
-      this.setState({
-        teams:teams,
-      })
-    },2000);
-    
+    this.load();
   }
 
-  render(){
-    const filterPerson = this.state.teams.filter(team =>{
+  load() {
+    fetch("http://localhost:3000/teams-json")
+      .then(res => res.json())
+      .then(teams => {
+        this.setState({
+          teams
+        });
+      });
+  }
+
+  render() {
+    const filterPerson = this.state.teams.filter(team => {
       return team.firstName.toLowerCase().includes(this.state.searchfield.toLowerCase()) ||
-      team.lastName.toLowerCase().includes(this.state.searchfield.toLowerCase())
+        team.lastName.toLowerCase().includes(this.state.searchfield.toLowerCase())
     })
     return (
       <div className='tc'>
@@ -42,7 +45,7 @@ class App extends Component {
       </div>
     );
   }
- 
+
 }
 
 export default App;
