@@ -4,7 +4,7 @@ import React from 'react';
 
 
 export const PersonTable = ({teams}) => (
-    <table id="list">
+    <table id='list' >
         <thead>
             <tr>
                 <th>First Name</th>
@@ -19,11 +19,11 @@ export const PersonTable = ({teams}) => (
             <td>{person.firstName}</td>
             <td>{person.lastName}</td>
             <td>
-                <a target="_blank" href={`https://github.com/gitHub=${person.gitHub}`} className="fa fa-github" aria-hidden="true"> </a>
+                <a target="_blank" href={`https://github.com/${person.gitHub}`} className="fa fa-github" aria-hidden="true"> </a>
             </td>
             <td>
-            <a href="#" className="delete-row" data-id="{person.id}">&#10006;</a>
-            <a href="#" className="edit-row" data-id="{person.id}">&#9998;</a>
+            <a href="#" className="delete-row" data-id={`${person.id}`}>&#10006;</a>
+            <a href="#" className="edit-row" data-id={`${person.id}`}>&#9998;</a>
             </td>
             </tr>
            ))}
@@ -40,7 +40,7 @@ export const PersonTable = ({teams}) => (
                     <input type="text" placeholder="GitHub account" name="gitHub" />
                 </td>
                 <td>
-                    <button>Save</button>
+                    <button >Save</button>
                 </td>
             </tr>
         </tfoot>
