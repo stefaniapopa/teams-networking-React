@@ -31,13 +31,13 @@ export const PersonTable = ({teams}) => (
         <tfoot>
             <tr>
                 <td>
-                    <input type="text" placeholder="First Name" name="firstName" />
+                    <input type="text" placeholder="First Name" required name="firstName" />
                 </td>
                 <td>
-                    <input type="text" placeholder="Last Name" name="lastName" />
+                    <input type="text" placeholder="Last Name" required name="lastName" />
                 </td>
                 <td>
-                    <input type="text" placeholder="GitHub account" name="gitHub" />
+                    <input type="text" placeholder="GitHub account" required name="gitHub" />
                 </td>
                 <td>
                     <button >Save</button>
