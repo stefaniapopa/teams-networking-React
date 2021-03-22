@@ -9,13 +9,24 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      teams: teams,
+      teams: [],
       searchfield: ''
     }
   }
 
   onSearchChange = (event) => {
     this.setState({ searchfield: event.target.value })
+  }
+
+  componentDidMount() {
+    console.warn('mount');
+    setTimeout(() => {
+      console.warn('loaded');
+      this.setState({
+        teams:teams,
+      })
+    },2000);
+    
   }
 
   render(){
