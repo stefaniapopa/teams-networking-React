@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
+body {
+  padding: 20px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+table {
+  margin-top: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#list {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+thead {
+  width: 100%;
+}
+
+#list th,#list td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #00aeef;
+}
+
+#list tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #00aeef;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+td input {
+  width: 100%;
+  padding: 0px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.fa {
+    padding: 5px ;
+    font-size: 50px;
+    width: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .fa:hover {
+    opacity: 0.7;
   }
-}
+
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+
+  .fa-github:before{
+    /* color:#6e5494; */
+    font-size: 40px;
+    padding-left: 2em;
+  }
+
+  input {
+    border-radius: 130px;
+    text-align: center ;
+  }
