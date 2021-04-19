@@ -5,34 +5,40 @@ import App from './App';
 import './App.css'
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
-import { createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const rootReducer = (state = { filter: '', teams:[]}, action) => {
-  console.warn('rootReducer', state, action);
+const teams = (state = [], action) => {
   switch(action.type){
     case 'TEAMS_LOADED': {
-      return { 
-        ...state,
-        teams: action.teams 
-      }
+      return action.teams 
     } 
     case 'TEAM_ADDED': {
-      return { 
-        ...state,
-        teams: [...state.teams, action.team]
-      }
+      return [...state, action.team]
     }
     case 'TEAM_REMOVED': {
-      return { 
-        ...state,
-        teams: state.teams.filter(team => team.id != action.id)
-      }
-    }  
+      return  state.filter(team => team.id != action.id)
+
+    } 
     default:
       return state;
   }
 };
+
+const filter = (state = '', action) => {
+  switch(action.type){
+    case 'FILTER_CHANGED': {
+      return action.filter ;
+    } 
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({
+  teams,
+  filter
+});
 
 const store = createStore(rootReducer);
 

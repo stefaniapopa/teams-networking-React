@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PersonTable } from './PersonTable';
-import SearchBox from './SearchBox';
+import { FilterContainer } from './filter';
 import 'font-awesome/css/font-awesome.min.css';
 import { connect } from 'react-redux';
 
@@ -8,13 +8,7 @@ import { connect } from 'react-redux';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchfield: ''
-    }
-  }
-
-  onSearchChange = (event) => {
-    this.setState({ searchfield: event.target.value })
+    this.state = {}
   }
 
   componentDidMount() {
@@ -22,7 +16,7 @@ class App extends Component {
   }
 
   load() {
-   
+
   }
 
   add(team) {
@@ -59,10 +53,14 @@ class App extends Component {
   }
 
   render() {
+    const f = this.props.filter;
+    const teams = this.props.teams.filter(team => team.members.toLowercase().indexOf(f) > -1);
     return (
       <div className='tc'>
         <h1>Teams Networking</h1>
-        <SearchBox searchChange={this.onSearchChange} />
+        <div>
+          <FilterContainer />
+        </div>
         <PersonTable
           teams={this.props.teams}
           onSubmit={team => {
@@ -79,12 +77,13 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    teams: state.teams
+  teams: state.teams,
+  filter: state.filter
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAdd: team => dispatch({type: 'TEAM_ADDED',team}),
-  onDelete: id => dispatch({type: 'TEAM_REMOVED',id})
+  onAdd: team => dispatch({ type: 'TEAM_ADDED', team }),
+  onDelete: id => dispatch({ type: 'TEAM_REMOVED', id })
 });
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
