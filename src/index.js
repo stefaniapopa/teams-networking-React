@@ -5,6 +5,27 @@ import App from './App';
 import './App.css'
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
+import { createStore } from 'redux';
+
+const rootReducer = (state = {teams:[]}, action) => {
+  console.warn('rootReducer', state, action);
+  switch(action.type){
+    case 'TEAMS_LOADED': {
+      return { teams: action.teams }
+    } 
+    default:
+      return state;
+  }
+};
+
+const store = createStore(rootReducer);
+
+store.subscribe( () => console.warn('data changed', store.getState()))
+
+store.dispatch({type: 'TEAMS_LOADED', teams: [1,2,3]});
+store.dispatch({type: 'TEAMS_LOADED', teams: [4, 5]});
+
+
 
 ReactDOM.render(
   <React.StrictMode>
