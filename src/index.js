@@ -18,7 +18,12 @@ const rootReducer = (state = {teams:[]}, action) => {
       return { 
         teams: state.teams.concat(action.team)
       }
-    } 
+    }
+    case 'TEAM_REMOVED': {
+      return { 
+        teams: state.teams.filter(team => team.id != action.id)
+      }
+    }  
     default:
       return state;
   }

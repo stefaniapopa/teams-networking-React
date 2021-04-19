@@ -41,10 +41,7 @@ class App extends Component {
       .then(r => {
         if (r.success) {
           team.id = r.id;
-          this.props.dispatch({
-            type: 'TEAM_ADDED',
-            team
-          })
+          this.props.onAdd(team);
         }
       });
   }
@@ -59,7 +56,7 @@ class App extends Component {
     })
       .then(r => r.json())
       .then(status => {
-        this.load();
+        this.props.onDelete(id);
       })
   }
 
@@ -87,6 +84,17 @@ const mapStateToProps = state => ({
     teams: state.teams
 });
 
-const AppContainer = connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  onAdd: (team) => { dispatch({
+    type: 'TEAM_ADDED',
+    team
+  })},
+  onDelete: id => dispatch({
+    type: 'TEAM_REMOVED',
+    id
+  })
+});
+
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;
