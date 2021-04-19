@@ -7,12 +7,12 @@ function getValue() {
     const lastName = document.querySelector('input[name=lastName]').value;
     const gitHub = document.querySelector('input[name=gitHub]').value;
 
-    const person = {
+    const team = {
         firstName,
         lastName,
         gitHub
     };
-    return person;
+    return team;
 }
 
 export const PersonTable = ({teams, onSubmit, onDelete}) => (
@@ -31,16 +31,16 @@ export const PersonTable = ({teams, onSubmit, onDelete}) => (
             </tr>
         </thead>
         <tbody>
-            {teams.map((person, i) => (
+            {teams.map((team, i) => (
             <tr key={i}>
-            <td>{person.firstName}</td>
-            <td>{person.lastName}</td>
+            <td>{team.firstName}</td>
+            <td>{team.lastName}</td>
             <td>
-                <a target="_blank" href={`https://github.com/${person.gitHub}`} className="fa fa-github" aria-hidden="true"> </a>
+                <a target="_blank" href={`https://github.com/${team.gitHub}`} className="fa fa-github" aria-hidden="true"> </a>
             </td>
             <td>
-            <a href="#" className="delete-row" onClick={ e => { onDelete(person.id);} }>&#10006;</a>
-            <a href="#" className="edit-row" data-id={`${person.id}`}>&#9998;</a>
+            <a href="#" className="delete-row" onClick={ e => { onDelete(team.id);} }>&#10006;</a>
+            <a href="#" className="edit-row" data-id={`${team.id}`}>&#9998;</a>
             </td>
             </tr>
            ))}

@@ -54,7 +54,8 @@ class App extends Component {
 
   render() {
     const f = this.props.filter;
-    const teams = this.props.teams.filter(team => team.members.toLowercase().indexOf(f) > -1);
+    const teams = this.props.teams.filter(team => team.firstName.toLowerCase().indexOf(f) > -1 ||
+      team.lastName.toLowerCase().indexOf(f) > -1 );
     return (
       <div className='tc'>
         <h1>Teams Networking</h1>
@@ -62,7 +63,7 @@ class App extends Component {
           <FilterContainer />
         </div>
         <PersonTable
-          teams={this.props.teams}
+          teams={teams}
           onSubmit={team => {
             this.add(team);
           }}

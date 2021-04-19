@@ -6,8 +6,8 @@ const Filter = ({onFilter}) =>(
         type='search'
         placeholder='Search...'
         style={{ borderRadius: '130px'}}
-        onInput={e => { onFilter(e.target.value.toLowerCase()) }}
-    />
+        onInput={e => { onFilter(e.target.value.toLowerCase()); 
+    }}/>
 )
 
 const mapStateToProps = state => ({

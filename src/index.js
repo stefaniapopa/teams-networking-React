@@ -28,7 +28,7 @@ const teams = (state = [], action) => {
 const filter = (state = '', action) => {
   switch(action.type){
     case 'FILTER_CHANGED': {
-      return action.filter ;
+      return action.filter
     } 
     default:
       return state;
