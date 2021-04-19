@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.state = {
       teams: [],
       searchfield: ''
@@ -39,13 +39,12 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(r => {
-        console.warn(r);
         if (r.success) {
-          const teams = this.state.teams.concat(team);
-          this.setState({
-            teams
-          });
-          //this.load();
+          team.id = r.id;
+          this.props.dispatch({
+            type: 'TEAM_ADDED',
+            team
+          })
         }
       });
   }
@@ -84,11 +83,9 @@ class App extends Component {
 
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     teams: state.teams
-  }
-};
+});
 
 const AppContainer = connect(mapStateToProps)(App);
 
