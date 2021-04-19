@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PersonTable } from './PersonTable';
 import SearchBox from './SearchBox';
 import 'font-awesome/css/font-awesome.min.css';
+import { connect } from 'react-redux';
 
 
 class App extends Component {
@@ -22,13 +23,7 @@ class App extends Component {
   }
 
   load() {
-    fetch("http://localhost:3000/teams-json")
-      .then(res => res.json())
-      .then(teams => {
-        this.setState({
-          teams
-        });
-      });
+   
   }
 
   add(team) {
@@ -75,7 +70,7 @@ class App extends Component {
         <h1>Teams Networking</h1>
         <SearchBox searchChange={this.onSearchChange} />
         <PersonTable
-          teams={this.state.teams}
+          teams={this.props.teams}
           onSubmit={team => {
             this.add(team);
           }}
@@ -89,4 +84,12 @@ class App extends Component {
 
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    teams: state.teams
+  }
+};
+
+const AppContainer = connect(mapStateToProps)(App);
+
+export default AppContainer;

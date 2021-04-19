@@ -6,6 +6,7 @@ import './App.css'
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 const rootReducer = (state = {teams:[]}, action) => {
   console.warn('rootReducer', state, action);
@@ -20,17 +21,25 @@ const rootReducer = (state = {teams:[]}, action) => {
 
 const store = createStore(rootReducer);
 
-store.subscribe( () => console.warn('data changed', store.getState()))
+store.subscribe( () => {
+   console.warn('data changed', store.getState());
+})
 
 store.dispatch({type: 'TEAMS_LOADED', teams: [1,2,3]});
-store.dispatch({type: 'TEAMS_LOADED', teams: [4, 5]});
 
-
+function load() {
+  fetch("http://localhost:3000/teams-json")
+    .then(res => res.json())
+    .then(teams => {
+      store.dispatch({type: 'TEAMS_LOADED', teams});
+    });
+}
+load();
 
 ReactDOM.render(
-  <React.StrictMode>
-  <App />
-</React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
